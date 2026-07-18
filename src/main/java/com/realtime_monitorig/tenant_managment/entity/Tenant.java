@@ -1,7 +1,56 @@
 package com.realtime_monitorig.tenant_managment.entity;
 
+import java.time.LocalDateTime;
 
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "tenant")
+@EntityListeners(AuditingEntityListener.class)
 public class Tenant {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
+
+    @Column(nullable = false)
+    private String name;
+
+    private String phone;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private TenantStatus status;
+
+
+    @Column(unique = true)
+    private String email;
+
+
+    @CreatedDate
+    @Column( nullable = false, updatable = false)
+    private LocalDateTime createdAt;
 
     
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 }
