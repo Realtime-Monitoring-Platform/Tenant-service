@@ -19,4 +19,6 @@ public interface TenantRepository extends JpaRepository<Tenant, UUID> {
     boolean existsByName(String name);
 
     Page<Tenant> findByStatus(TenantStatus status, Pageable pageable);
+
+    Page<Tenant> findByCompanyNameContainingIgnoreCase(String companyName, Pageable pageable);
 }
