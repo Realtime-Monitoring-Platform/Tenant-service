@@ -37,20 +37,19 @@ public class Tenant {
 
     private String phone;
 
+    private String companyName;
+    
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TenantStatus status;
 
-
     @Column(unique = true)
     private String email;
 
-
     @CreatedDate
-    @Column( nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 }
