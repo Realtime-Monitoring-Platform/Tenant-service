@@ -1,6 +1,6 @@
 package com.realtime_monitorig.tenant_managment.dto;
 
-public class TenantRequest {
+public class UpdateTenantRequest {
 
     
 }
