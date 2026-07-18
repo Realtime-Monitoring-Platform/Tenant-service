@@ -1,0 +1,19 @@
+
+server:
+  port: 9004
+spring:
+    cloud:
+        config:
+            enabled: false
+    application:
+        name: tenant_mang
+    datasource:
+        driver-class-name: org.postgresql.Driver
+        url: jdbc:postgresql://localhost:5432/postgres
+        username: postgres
+        password: chedly
+    jpa:
+        hibernate:
+            ddl-auto: update
+        database: postgresql
+        database-platform: org.hibernate.dialect.PostgreSQLDialect

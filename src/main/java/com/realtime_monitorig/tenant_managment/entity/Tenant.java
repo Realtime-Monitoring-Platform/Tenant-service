@@ -1,11 +1,13 @@
 package com.realtime_monitorig.tenant_managment.entity;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,9 +30,10 @@ import lombok.Setter;
 @Table(name = "tenant")
 @EntityListeners(AuditingEntityListener.class)
 public class Tenant {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private UUID id;
 
     @Column(nullable = false)
     private String name;
@@ -38,7 +41,7 @@ public class Tenant {
     private String phone;
 
     private String companyName;
-    
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TenantStatus status;
