@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.realtime_monitorig.tenant_managment.dto.CreateTenantRequest;
 import com.realtime_monitorig.tenant_managment.dto.TenantResponse;
+import com.realtime_monitorig.tenant_managment.dto.UpdateTenantRequest;
 import com.realtime_monitorig.tenant_managment.entity.Tenant;
 import com.realtime_monitorig.tenant_managment.entity.TenantStatus;
 import com.realtime_monitorig.tenant_managment.mapper.TenantMapper;
@@ -63,7 +64,7 @@ public class TenantServiceImpl implements TenantService {
     }
 
     @Override
-    public TenantResponse updateTenant(UUID tenantId, CreateTenantRequest request) {
+    public TenantResponse updateTenant(UUID tenantId, UpdateTenantRequest request) {
         Optional<Tenant> tenantOptional = this.tenantRepository.findById(tenantId);
         if (tenantOptional.isEmpty()) {
             throw new RuntimeException("tenant not found with id: " + tenantId);
