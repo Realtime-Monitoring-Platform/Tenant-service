@@ -80,4 +80,9 @@ public class TenantServiceImpl implements TenantService {
         this.tenantRepository.deleteById(id);
     }
 
+    @Override
+    public Page<TenantResponse> filterByStatus(TenantStatus status, Pageable pageable) {
+        return this.tenantRepository.findByStatus(status, pageable).map(tenantMapper::toResponse);
+    }
+
 }

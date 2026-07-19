@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import com.realtime_monitorig.tenant_managment.dto.CreateTenantRequest;
 import com.realtime_monitorig.tenant_managment.dto.TenantResponse;
 import com.realtime_monitorig.tenant_managment.dto.UpdateTenantRequest;
+import com.realtime_monitorig.tenant_managment.entity.TenantStatus;
 
 public interface TenantService {
     TenantResponse createTeanant(CreateTenantRequest request);
@@ -16,6 +17,7 @@ public interface TenantService {
     Page<TenantResponse> getTenantByCompanyName(String companyName, Pageable pageable);
     TenantResponse updateTenant(UUID tenantId, UpdateTenantRequest request);
     void deletetenant(UUID id);
+    Page<TenantResponse> filterByStatus(TenantStatus status, Pageable pageable);
 
 
 }
