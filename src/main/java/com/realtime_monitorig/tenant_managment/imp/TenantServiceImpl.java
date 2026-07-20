@@ -60,8 +60,9 @@ public class TenantServiceImpl implements TenantService {
     @Override
     @Transactional(readOnly = true)
     public Page<TenantResponse> getTenantByCompanyName(String companyName, Pageable pageable) {
-        
-        return this.tenantRepository.findByCompanyNameContainingIgnoreCase(companyName, pageable).map(tenantMapper::toResponse);
+
+        return this.tenantRepository.findByCompanyNameContainingIgnoreCase(companyName, pageable)
+                .map(tenantMapper::toResponse);
     }
 
     @Override
