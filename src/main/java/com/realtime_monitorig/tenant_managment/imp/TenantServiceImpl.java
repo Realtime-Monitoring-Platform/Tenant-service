@@ -14,6 +14,7 @@ import com.realtime_monitorig.tenant_managment.dto.TenantResponse;
 import com.realtime_monitorig.tenant_managment.dto.UpdateTenantRequest;
 import com.realtime_monitorig.tenant_managment.entity.Tenant;
 import com.realtime_monitorig.tenant_managment.entity.TenantStatus;
+import com.realtime_monitorig.tenant_managment.exceptions.TenantNotFoundException;
 import com.realtime_monitorig.tenant_managment.mapper.TenantMapper;
 import com.realtime_monitorig.tenant_managment.service.TenantService;
 
@@ -44,7 +45,7 @@ public class TenantServiceImpl implements TenantService {
     public TenantResponse getTenantById(UUID tennantId) {
         Optional<Tenant> tenant = this.tenantRepository.findById(tennantId);
         if (tenant.isEmpty()) {
-            throw new RuntimeException("tenant not found with id: " + tennantId);
+            throw new TenantNotFoundException("tenant not found with id: " + tennantId);
         }
         TenantResponse response = tenantMapper.toResponse(tenant.get());
         return response;
@@ -67,7 +68,7 @@ public class TenantServiceImpl implements TenantService {
     public TenantResponse updateTenant(UUID tenantId, UpdateTenantRequest request) {
         Optional<Tenant> tenantOptional = this.tenantRepository.findById(tenantId);
         if (tenantOptional.isEmpty()) {
-            throw new RuntimeException("tenant not found with id: " + tenantId);
+            throw new TenantNotFoundException("tenant not found with id: " + tenantId);
         }
         Tenant tenant = tenantOptional.get();
         tenantMapper.updateEntityFromRequest(request, tenant);
