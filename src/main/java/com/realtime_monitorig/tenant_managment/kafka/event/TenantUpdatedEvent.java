@@ -4,6 +4,7 @@ import java.util.UUID;
 
 public record TenantUpdatedEvent(
     DomainEvent event,
+    UUID id,
     String name,
     String companyName,
     String email,

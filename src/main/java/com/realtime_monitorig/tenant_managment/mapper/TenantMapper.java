@@ -3,6 +3,7 @@ package com.realtime_monitorig.tenant_managment.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.ReportingPolicy;
 
 import com.realtime_monitorig.tenant_managment.dto.CreateTenantRequest;
@@ -12,7 +13,8 @@ import com.realtime_monitorig.tenant_managment.entity.Tenant;
 
 @Mapper(
     componentModel = MappingConstants.ComponentModel.SPRING,
-    unmappedTargetPolicy = ReportingPolicy.IGNORE
+    unmappedTargetPolicy = ReportingPolicy.IGNORE,
+    nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE
 )
 
 public interface TenantMapper {
