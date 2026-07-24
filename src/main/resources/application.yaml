@@ -1,19 +1,40 @@
-
 server:
   port: 9004
+
+
 spring:
-    cloud:
-        config:
-            enabled: false
-    application:
-        name: tenant_mang
-    datasource:
-        driver-class-name: org.postgresql.Driver
-        url: jdbc:postgresql://localhost:5432/postgres
-        username: postgres
-        password: chedly
-    jpa:
-        hibernate:
-            ddl-auto: update
-        database: postgresql
-        database-platform: org.hibernate.dialect.PostgreSQLDialect
+  application:
+    name: tenant_mang
+
+  cloud:
+    config:
+      enabled: false
+
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/tenant_mang
+    username: postgres
+    password: chedly
+
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+         spring.json.add.type.info: false
+         spring.json.type.mapping: >
+           tenantCreated:com.realtime_monitorig.tenant_managment.kafka.event.TenantCreatedEvent,
+           tenantUpdated:com.realtime_monitorig.tenant_managment.kafka.event.TenantUpdatedEvent
+
+grpc:
+  server:
+    port: 9095

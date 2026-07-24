@@ -15,6 +15,7 @@ import com.realtime_monitorig.tenant_managment.dto.UpdateTenantRequest;
 import com.realtime_monitorig.tenant_managment.entity.Tenant;
 import com.realtime_monitorig.tenant_managment.entity.TenantStatus;
 import com.realtime_monitorig.tenant_managment.exceptions.TenantNotFoundException;
+import com.realtime_monitorig.tenant_managment.kafka.TenantProducer;
 import com.realtime_monitorig.tenant_managment.mapper.TenantMapper;
 import com.realtime_monitorig.tenant_managment.service.TenantService;
 
@@ -29,7 +30,7 @@ public class TenantServiceImpl implements TenantService {
 
     private final TenantRepository tenantRepository;
     private final TenantMapper tenantMapper;
-
+    private final TenantProducer tenantProducer;
     @Override
     public TenantResponse createTeanant(CreateTenantRequest request) {
         Tenant tenant = tenantMapper.toEntity(request);
@@ -37,6 +38,7 @@ public class TenantServiceImpl implements TenantService {
         Tenant savedTenant = tenantRepository.save(tenant);
 
         TenantResponse response = tenantMapper.toResponse(savedTenant);
+        tenantProducer.sendTenantCreation(savedTenant);
         return response;
     }
 
@@ -74,6 +76,7 @@ public class TenantServiceImpl implements TenantService {
         Tenant tenant = tenantOptional.get();
         tenantMapper.updateEntityFromRequest(request, tenant);
         Tenant updatedTenant = tenantRepository.save(tenant);
+        tenantProducer.sendTenantUpdate(updatedTenant);
         return tenantMapper.toResponse(updatedTenant);
     }
 
