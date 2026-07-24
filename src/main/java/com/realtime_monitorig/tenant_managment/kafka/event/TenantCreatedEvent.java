@@ -3,7 +3,9 @@ package com.realtime_monitorig.tenant_managment.kafka.event;
 import java.util.UUID;
 
 public record TenantCreatedEvent(
-    DomainEvent event,
+    UUID id,
+    DomainEvent even,
+   
     String name,
     String companyName,
     String email,

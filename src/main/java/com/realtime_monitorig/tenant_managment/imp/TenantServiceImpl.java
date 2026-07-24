@@ -83,6 +83,7 @@ public class TenantServiceImpl implements TenantService {
     @Override
     public void deletetenant(UUID id) {
         this.tenantRepository.deleteById(id);
+        this.tenantProducer.sendTenantDeleted(id);
     }
 
     @Override

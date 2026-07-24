@@ -27,7 +27,9 @@ public class TenantProducer {
             "TENANT",
             Instant.now()
         );
+
         TenantCreatedEvent tenantEvent = new TenantCreatedEvent(
+            tenant.getId(),
             event,
             tenant.getName(),
             tenant.getCompanyName(),
@@ -58,5 +60,17 @@ public class TenantProducer {
 
         log.info("sending tenant update event: {}", tenantEvent);
         kafkaTemplate.send("tenant-events-v4", tenant.getId().toString(), tenantEvent);
+    }
+
+    public void sendTenantDeleted(UUID tenantId) {
+        DomainEvent event = new DomainEvent(
+            UUID.randomUUID(),
+            "TENANT_DELETED",
+            tenantId,
+            "TENANT",
+            Instant.now()
+        );
+
+        kafkaTemplate.send("tenant-events-v4", tenantId.toString(), event);
     }
 }

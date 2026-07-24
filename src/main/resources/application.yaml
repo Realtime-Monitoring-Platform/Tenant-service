@@ -35,6 +35,3 @@ spring:
            tenantCreated:com.realtime_monitorig.tenant_managment.kafka.event.TenantCreatedEvent,
            tenantUpdated:com.realtime_monitorig.tenant_managment.kafka.event.TenantUpdatedEvent
 
-grpc:
-  server:
-    port: 9095
