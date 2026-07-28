@@ -33,5 +33,6 @@ spring:
          spring.json.add.type.info: false
          spring.json.type.mapping: >
            tenantCreated:com.realtime_monitorig.tenant_managment.kafka.event.TenantCreatedEvent,
-           tenantUpdated:com.realtime_monitorig.tenant_managment.kafka.event.TenantUpdatedEvent
+           tenantUpdated:com.realtime_monitorig.tenant_managment.kafka.event.TenantUpdatedEvent,
+           tenantDeleted:com.realtime_monitorig.tenant_managment.kafka.event.TenantDeletedEvent
 

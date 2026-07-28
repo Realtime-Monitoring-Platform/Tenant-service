@@ -18,70 +18,67 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 public class TenantProducer {
-    private final KafkaTemplate<String, Object> kafkaTemplate;
+        private final KafkaTemplate<String, Object> kafkaTemplate;
 
-    public void sendTenantCreation(Tenant tenant) {
-        DomainEvent event = new DomainEvent(
-                UUID.randomUUID(),
-                "TENANT_CREATED",
-                tenant.getId(),
-                "TENANT",
-                Instant.now());
+        public void sendTenantCreation(Tenant tenant) {
+                DomainEvent event = new DomainEvent(
+                                UUID.randomUUID(),
+                                "TENANT_CREATED",
+                                tenant.getId(),
+                                "TENANT",
+                                Instant.now());
 
-        TenantCreatedEvent tenantEvent = new TenantCreatedEvent(
-                tenant.getId(),
-                event,
-                tenant.getName(),
-                tenant.getCompanyName(),
-                tenant.getEmail(),
-                tenant.getPhone(),
-                tenant.getStatus() != null ? tenant.getStatus().name() : null);
-        log.info("sending tenant creation event: {}", tenantEvent);
-        kafkaTemplate.send("tenant-events-v5", tenant.getId().toString(), tenantEvent);
-    }
+                TenantCreatedEvent tenantEvent = new TenantCreatedEvent(
+                                tenant.getId(),
+                                event,
+                                tenant.getName(),
+                                tenant.getCompanyName(),
+                                tenant.getEmail(),
+                                tenant.getPhone(),
+                                tenant.getStatus() != null ? tenant.getStatus().name() : null);
+                log.info("sending tenant creation event: {}", tenantEvent);
+                kafkaTemplate.send("tenant-events-v5", tenant.getId().toString(), tenantEvent);
+        }
 
-    public void sendTenantUpdate(Tenant tenant) {
-        DomainEvent event = new DomainEvent(
-                UUID.randomUUID(),
-                "TENANT_UPDATED",
-                tenant.getId(),
-                "TENANT",
-                Instant.now());
-        TenantUpdatedEvent tenantEvent = new TenantUpdatedEvent(
+        public void sendTenantUpdate(Tenant tenant) {
+                DomainEvent event = new DomainEvent(
+                                UUID.randomUUID(),
+                                "TENANT_UPDATED",
+                                tenant.getId(),
+                                "TENANT",
+                                Instant.now());
+                TenantUpdatedEvent tenantEvent = new TenantUpdatedEvent(
 
-                event,
-                tenant.getId(),
-                tenant.getName(),
-                tenant.getCompanyName(),
-                tenant.getEmail(),
-                tenant.getPhone(),
-                tenant.getStatus() != null ? tenant.getStatus().name() : null);
+                                event,
+                                tenant.getId(),
+                                tenant.getName(),
+                                tenant.getCompanyName(),
+                                tenant.getEmail(),
+                                tenant.getPhone(),
+                                tenant.getStatus() != null ? tenant.getStatus().name() : null);
 
-        log.info("sending tenant update event: {}", tenantEvent);
-        kafkaTemplate.send("tenant-events-v5", tenant.getId().toString(), tenantEvent);
-    }
+                log.info("sending tenant update event: {}", tenantEvent);
+                kafkaTemplate.send("tenant-events-v5", tenant.getId().toString(), tenantEvent);
+        }
 
-    public void sendTenantDeleted(UUID tenantId) {
+        public void sendTenantDeleted(UUID tenantId) {
 
-    DomainEvent event = new DomainEvent(
-            UUID.randomUUID(),
-            "TENANT_DELETED",
-            tenantId,
-            "TENANT",
-            Instant.now()
-    );
+                DomainEvent event = new DomainEvent(
+                                UUID.randomUUID(),
+                                "TENANT_DELETED",
+                                tenantId,
+                                "TENANT",
+                                Instant.now());
 
-    TenantDeletedEvent tenantEvent = new TenantDeletedEvent(
-            event,
-            tenantId
-    );
+                TenantDeletedEvent tenantEvent = new TenantDeletedEvent(
+                                event,
+                                tenantId);
 
-    log.info("Sending tenant deletion event: {}", tenantEvent);
+                log.info("Sending tenant deletion event: {}", tenantEvent);
 
-    kafkaTemplate.send(
-            "tenant-events-v5",
-            tenantId.toString(),
-            tenantEvent
-    );
-}
+                kafkaTemplate.send(
+                                "tenant-events-v5",
+                                tenantId.toString(),
+                                tenantEvent);
+        }
 }

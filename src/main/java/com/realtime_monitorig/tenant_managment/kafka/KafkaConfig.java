@@ -28,7 +28,9 @@ public class KafkaConfig {
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
         config.put(JsonSerializer.TYPE_MAPPINGS,
                 "tenantCreated:com.realtime_monitorig.tenant_managment.kafka.event.TenantCreatedEvent," +
-                        "tenantUpdated:com.realtime_monitorig.tenant_managment.kafka.event.TenantUpdatedEvent");
+                        "tenantUpdated:com.realtime_monitorig.tenant_managment.kafka.event.TenantUpdatedEvent," +
+                        "tenantDeleted:com.realtime_monitorig.tenant_managment.kafka.event.TenantDeletedEvent"
+                    );
         return new DefaultKafkaProducerFactory<>(config);
     }
 
