@@ -4,7 +4,7 @@ server:
 
 spring:
   application:
-    name: tenant_mang
+    name: tenant-service
 
   cloud:
     config:

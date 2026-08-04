@@ -1,5 +1,7 @@
 package com.realtime_monitorig.tenant_managment.dto;
 
+import java.util.UUID;
+
 import com.realtime_monitorig.tenant_managment.entity.TenantStatus;
 
 import jakarta.persistence.Column;
@@ -23,4 +25,6 @@ public class UpdateTenantRequest {
     private String email;
 
     private String phone;
+
+    private UUID AdminId;
 }

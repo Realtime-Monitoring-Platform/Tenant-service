@@ -48,6 +48,7 @@ public class Tenant {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TenantStatus status;
+    
 
     @Column(unique = true)
     private String email;
@@ -58,4 +59,6 @@ public class Tenant {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    private UUID AdminId;
 }

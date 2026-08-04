@@ -30,5 +30,6 @@ public class TenantResponse {
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
+    private UUID AdminId;
     
 }

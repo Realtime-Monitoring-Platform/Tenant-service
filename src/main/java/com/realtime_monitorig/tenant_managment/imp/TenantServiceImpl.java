@@ -35,6 +35,8 @@ public class TenantServiceImpl implements TenantService {
     public TenantResponse createTeanant(CreateTenantRequest request) {
         Tenant tenant = tenantMapper.toEntity(request);
         tenant.setStatus(TenantStatus.ACTIVE);
+        System.out.println("creating tenant:///////////////////////////"+request.getAdminId());
+        tenant.setAdminId(request.getAdminId());
         Tenant savedTenant = tenantRepository.save(tenant);
 
         TenantResponse response = tenantMapper.toResponse(savedTenant);

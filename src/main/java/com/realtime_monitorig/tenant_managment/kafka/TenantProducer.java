@@ -35,9 +35,11 @@ public class TenantProducer {
                                 tenant.getCompanyName(),
                                 tenant.getEmail(),
                                 tenant.getPhone(),
-                                tenant.getStatus() != null ? tenant.getStatus().name() : null);
+                                tenant.getStatus() != null ? tenant.getStatus().name() : null,
+                                tenant.getAdminId()
+                        );
                 log.info("sending tenant creation event: {}", tenantEvent);
-                kafkaTemplate.send("tenant-events-v5", tenant.getId().toString(), tenantEvent);
+                kafkaTemplate.send("tenant-events-v6", tenant.getId().toString(), tenantEvent);
         }
 
         public void sendTenantUpdate(Tenant tenant) {
@@ -55,10 +57,11 @@ public class TenantProducer {
                                 tenant.getCompanyName(),
                                 tenant.getEmail(),
                                 tenant.getPhone(),
-                                tenant.getStatus() != null ? tenant.getStatus().name() : null);
+                                tenant.getStatus() != null ? tenant.getStatus().name() : null,
+                        tenant.getAdminId());
 
                 log.info("sending tenant update event: {}", tenantEvent);
-                kafkaTemplate.send("tenant-events-v5", tenant.getId().toString(), tenantEvent);
+                kafkaTemplate.send("tenant-events-v6", tenant.getId().toString(), tenantEvent);
         }
 
         public void sendTenantDeleted(UUID tenantId) {
@@ -77,7 +80,7 @@ public class TenantProducer {
                 log.info("Sending tenant deletion event: {}", tenantEvent);
 
                 kafkaTemplate.send(
-                                "tenant-events-v5",
+                                "tenant-events-v6",
                                 tenantId.toString(),
                                 tenantEvent);
         }
