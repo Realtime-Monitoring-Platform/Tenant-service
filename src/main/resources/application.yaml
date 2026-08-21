@@ -1,0 +1,46 @@
+spring:
+  application:
+    name: tenant-service
+  config:
+    import: "optional:configserver:http://localhost:9000"
+server:
+  port: 8222
+
+# server:
+#   port: 9004
+
+
+# spring:
+#   application:
+#     name: tenant-service
+
+#   cloud:
+#     config:
+#       enabled: false
+
+
+#   datasource:
+#     driver-class-name: org.postgresql.Driver
+#     url: jdbc:postgresql://localhost:5432/tenant_mang
+#     username: postgres
+#     password: chedly
+
+
+#   jpa:
+#     hibernate:
+#       ddl-auto: update
+#     database: postgresql
+#     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+#   kafka:
+#     bootstrap-servers: localhost:9092
+#     producer:
+#       key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+#       properties:
+#          spring.json.add.type.info: false
+#          spring.json.type.mapping: >
+#            tenantCreated:com.realtime_monitorig.tenant_managment.kafka.event.TenantCreatedEvent,
+#            tenantUpdated:com.realtime_monitorig.tenant_managment.kafka.event.TenantUpdatedEvent,
+#            tenantDeleted:com.realtime_monitorig.tenant_managment.kafka.event.TenantDeletedEvent
+
