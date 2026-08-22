@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: tenant-service-test
+  config:
+    # Do not attempt to fetch config from the config server during tests.
+    import: ""
+  cloud:
+    config:
+      enabled: false
+    discovery:
+      enabled: false
+
+  # In-memory database so the JPA layer works without a real PostgreSQL instance.
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.H2Dialect
+    open-in-view: false
+
+  kafka:
+    # Kafka is never contacted during tests; the producer factory connects lazily.
+    bootstrap-servers: localhost:9092
+
+eureka:
+  client:
+    enabled: false
+
+grpc:
+  server:
+    enabled: false
+    port: -1
