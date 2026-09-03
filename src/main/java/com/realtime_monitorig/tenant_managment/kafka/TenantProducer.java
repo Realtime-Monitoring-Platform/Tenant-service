@@ -36,7 +36,7 @@ public class TenantProducer {
                                 tenant.getEmail(),
                                 tenant.getPhone(),
                                 tenant.getStatus() != null ? tenant.getStatus().name() : null,
-                                tenant.getAdminId()
+                                tenant.getAdminId() != null ? tenant.getAdminId() : null
                         );
                 log.info("sending tenant creation event: {}", tenantEvent);
                 kafkaTemplate.send("tenant-events-v6", tenant.getId().toString(), tenantEvent);
@@ -58,7 +58,8 @@ public class TenantProducer {
                                 tenant.getEmail(),
                                 tenant.getPhone(),
                                 tenant.getStatus() != null ? tenant.getStatus().name() : null,
-                        tenant.getAdminId());
+                                tenant.getAdminId() != null ? tenant.getAdminId() : null
+                        );
 
                 log.info("sending tenant update event: {}", tenantEvent);
                 kafkaTemplate.send("tenant-events-v6", tenant.getId().toString(), tenantEvent);

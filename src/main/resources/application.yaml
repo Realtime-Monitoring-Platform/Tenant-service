@@ -2,8 +2,9 @@ spring:
   application:
     name: tenant-service
   config:
-    import: ${SPRING_CONFIG_IMPORT:optional:configserver:http://config-server:9000}
-    
+    import: ${SPRING_CONFIG_IMPORT:optional:configserver:http://localhost:9000}
+
+
 # server:
 #   port: 8222
 
